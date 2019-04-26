@@ -1,7 +1,4 @@
-# Copyright (c) Jupyter Development Team.
-# Distributed under the terms of the Modified BSD License.
-
-# Ubuntu 18.04 (bionic) from 2018-05-26
+# Ubuntu 16.04 (bionic) from 2018-05-26
 # https://github.com/docker-library/official-images/commit/aac6a45b9eb2bffb8102353c350d341a410fb169
 ARG BASE_CONTAINER=nvidia/cuda:10.0-devel-ubuntu16.04
 FROM $BASE_CONTAINER
@@ -9,7 +6,7 @@ FROM $BASE_CONTAINER
 LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 ARG NB_USER="jovyan"
 ARG NB_UID="1000"
-ARG NB_GID="100"
+ARG NB_GID="0"
 
 USER root
 
@@ -42,7 +39,7 @@ ENV PATH=$CONDA_DIR/bin:$PATH \
     HOME=/home/$NB_USER
 
 # Add a script that we will use to correct permissions after running certain commands
-#ADD fix-permissions /usr/local/bin/fix-permissions
+ADD fix-permissions /usr/local/bin/fix-permissions
 
 # Enable prompt color in the skeleton .bashrc before creating the default NB_USER
 RUN sed -i 's/^#force_color_prompt=yes/force_color_prompt=yes/' /etc/skel/.bashrc
@@ -55,26 +52,26 @@ RUN groupadd wheel -g 11 && \
     mkdir -p $CONDA_DIR && \
     chown $NB_USER:$NB_GID $CONDA_DIR && \
     chmod g+w /etc/passwd 
-    #&& \
-    #fix-permissions $HOME && \
-    #fix-permissions "$(dirname $CONDA_DIR)"
+    && \
+    fix-permissions $HOME && \
+    fix-permissions "$(dirname $CONDA_DIR)"
 
 USER $NB_UID
 
 # Setup work directory for backward-compatibility
 RUN mkdir /home/$NB_USER/work 
-    #&& \
-    #fix-permissions /home/$NB_USER
+    && \
+    fix-permissions /home/$NB_USER
 
 # Install conda as jovyan and check the md5 sum provided on the download site
-ENV MINICONDA_VERSION=4.5.12 \
+ENV MINICONDA_VERSION=4.6.14 \
     CONDA_VERSION=4.6.7
 
 RUN cd /tmp && \
-    wget --quiet https://repo.continuum.io/miniconda/Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh && \
-    echo "866ae9dff53ad0874e1d1a60b1ad1ef8 *Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh" | md5sum -c - && \
-    /bin/bash Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh -f -b -p $CONDA_DIR && \
-    rm Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh && \
+    wget --quiet https://repo.continuum.io/miniconda/Miniconda2-${MINICONDA_VERSION}-Linux-x86_64.sh && \
+    echo "866ae9dff53ad0874e1d1a60b1ad1ef8 *Miniconda2-${MINICONDA_VERSION}-Linux-x86_64.sh" | md5sum -c - && \
+    /bin/bash Miniconda2-${MINICONDA_VERSION}-Linux-x86_64.sh -f -b -p $CONDA_DIR && \
+    rm Miniconda2-${MINICONDA_VERSION}-Linux-x86_64.sh && \
     $CONDA_DIR/bin/conda config --system --prepend channels conda-forge && \
     $CONDA_DIR/bin/conda config --system --set auto_update_conda false && \
     $CONDA_DIR/bin/conda config --system --set show_channel_urls true && \
@@ -82,17 +79,17 @@ RUN cd /tmp && \
     $CONDA_DIR/bin/conda update --all --quiet --yes && \
     conda clean -tipsy && \
     rm -rf /home/$NB_USER/.cache/yarn 
-    #&& \
-    #fix-permissions $CONDA_DIR && \
-    #fix-permissions /home/$NB_USER
+    && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
 
 # Install Tini
 RUN conda install --quiet --yes 'tini=0.18.0' && \
     conda list tini | grep tini | tr -s ' ' | cut -d ' ' -f 1,2 >> $CONDA_DIR/conda-meta/pinned && \
     conda clean -tipsy 
-    #&& \
-    #fix-permissions $CONDA_DIR && \
-    #fix-permissions /home/$NB_USER
+    && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
 
 # Install Jupyter Notebook, Lab, and Hub
 # Generate a notebook server config
@@ -110,9 +107,9 @@ RUN conda install --quiet --yes \
     jupyter notebook --generate-config && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
     rm -rf /home/$NB_USER/.cache/yarn 
-    #&& \
-    #fix-permissions $CONDA_DIR && \
-    #fix-permissions /home/$NB_USER
+    && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
 
 USER root
 
@@ -126,7 +123,7 @@ COPY start.sh /usr/local/bin/
 COPY start-notebook.sh /usr/local/bin/
 COPY start-singleuser.sh /usr/local/bin/
 COPY jupyter_notebook_config.py /etc/jupyter/
-#RUN fix-permissions /etc/jupyter/
+RUN fix-permissions /etc/jupyter/
 # Configure container startup
 USER $NB_UID
 ENTRYPOINT ["tini", "-g", "--"]
