@@ -97,7 +97,7 @@ RUN conda install --quiet --yes 'tini=0.18.0' && \
 # Do all this in a single RUN command to avoid duplicating all of the
 # files across image layers when the permissions change
 RUN conda install --quiet --yes \
-    'notebook=5.1.0' && \
+    'notebook=5.7.5' && \
     conda clean -tipsy && \
     jupyter notebook --generate-config && \
     rm -rf /home/$NB_USER/.cache/yarn 
