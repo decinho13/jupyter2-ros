@@ -1,6 +1,6 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
-ARG BASE_CONTAINER=decinho13/base-notebook:scipy
+ARG BASE_CONTAINER=decinho13/base-notebook2:scipy
 FROM $BASE_CONTAINER
 
 USER root
