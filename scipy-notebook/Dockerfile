@@ -22,7 +22,7 @@ RUN conda install --quiet --yes \
     'ipywidgets=6.0*' \
     'pandas=0.24*' \
     'numexpr=2.6*' \
-    'matplotlib=2.2.4' \
+    'matplotlib=2.2.0' \
     'scipy=1.2*' \
     'seaborn=0.9*' \
     'scikit-learn=0.20*' \
