@@ -37,8 +37,8 @@ fi
 if [ ! -z "$JUPYTER_ENABLE_LAB" ]; then
   NOTEBOOK_BIN="jupyter labhub"
 else
-  #NOTEBOOK_BIN="jupyterhub-singleuser"
-  NOTEBOOK_BIN="jupyter labhub"
+  NOTEBOOK_BIN="jupyterhub-singleuser"
+  #NOTEBOOK_BIN="jupyter labhub"
 fi
 
 . /usr/local/bin/start.sh $NOTEBOOK_BIN $NOTEBOOK_ARGS "$@"
