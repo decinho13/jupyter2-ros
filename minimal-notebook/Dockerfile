@@ -1,6 +1,6 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
-ARG BASE_CONTAINER=decinho13/base-notebook:latest
+ARG BASE_CONTAINER=decinho13/base-notebook2:base
 FROM $BASE_CONTAINER
 
 LABEL maintainer=Dennis_Lubczyk
