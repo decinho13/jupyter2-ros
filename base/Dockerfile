@@ -6,7 +6,7 @@ FROM $BASE_CONTAINER
 LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 ARG NB_USER="jovyan"
 ARG NB_UID="1000"
-ARG NB_GID="0"
+ARG NB_GID="100"
 
 USER root
 
