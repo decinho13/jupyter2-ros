@@ -22,7 +22,7 @@ RUN conda install --quiet --yes \
     'ipywidgets=6.0*' \
     'pandas=0.24*' \
     'numexpr=2.6*' \
-    'matplotlib=2.2.4*' \
+    'matplotlib=2.2.4' \
     'scipy=1.2*' \
     'seaborn=0.9*' \
     'scikit-learn=0.20*' \
@@ -31,7 +31,6 @@ RUN conda install --quiet --yes \
     'cython=0.29*' \
     'patsy=0.5*' \
     'statsmodels=0.9*' \
-    'cPickle*' \
     'dill=0.2*' \
     'dask=1.1.*' \
     'numba=0.42*' \
