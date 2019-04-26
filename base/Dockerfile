@@ -99,7 +99,6 @@ RUN conda install --quiet --yes 'tini=0.18.0' && \
 RUN conda install --quiet --yes \
     'notebook=5.1.0' && \
     conda clean -tipsy && \
-    npm cache clean --force && \
     jupyter notebook --generate-config && \
     rm -rf /home/$NB_USER/.cache/yarn 
     #&& \
