@@ -51,9 +51,10 @@ RUN groupadd wheel -g 11 && \
     useradd -m -s /bin/bash -N -u $NB_UID $NB_USER && \
     mkdir -p $CONDA_DIR && \
     chown $NB_USER:$NB_GID $CONDA_DIR && \
-    chmod g+w /etc/passwd && \
-    sudo bash fix-permissions $HOME && \
-    sudo bash fix-permissions "$(dirname $CONDA_DIR)"
+    chmod g+w /etc/passwd 
+    #&& \
+    #sudo bash fix-permissions $HOME && \
+    #sudo bash fix-permissions "$(dirname $CONDA_DIR)"
 
 USER $NB_UID
 
@@ -76,16 +77,18 @@ RUN cd /tmp && \
     $CONDA_DIR/bin/conda install --quiet --yes conda="${CONDA_VERSION%.*}.*" && \
     $CONDA_DIR/bin/conda update --all --quiet --yes && \
     conda clean -tipsy && \
-    rm -rf /home/$NB_USER/.cache/yarn && \
-    fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
+    rm -rf /home/$NB_USER/.cache/yarn 
+    #&& \
+    #fix-permissions $CONDA_DIR && \
+    #fix-permissions /home/$NB_USER
 
 # Install Tini
 RUN conda install --quiet --yes 'tini=0.18.0' && \
     conda list tini | grep tini | tr -s ' ' | cut -d ' ' -f 1,2 >> $CONDA_DIR/conda-meta/pinned && \
-    conda clean -tipsy && \
-    fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
+    conda clean -tipsy 
+    #&& \
+    #fix-permissions $CONDA_DIR && \
+    #fix-permissions /home/$NB_USER
 
 # Install Jupyter Notebook, Lab, and Hub
 # Generate a notebook server config
@@ -102,9 +105,10 @@ RUN conda install --quiet --yes \
     npm cache clean --force && \
     jupyter notebook --generate-config && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
-    rm -rf /home/$NB_USER/.cache/yarn && \
-    fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
+    rm -rf /home/$NB_USER/.cache/yarn 
+    #&& \
+    #fix-permissions $CONDA_DIR && \
+    #fix-permissions /home/$NB_USER
 
 USER root
 
@@ -118,7 +122,7 @@ COPY start.sh /usr/local/bin/
 COPY start-notebook.sh /usr/local/bin/
 COPY start-singleuser.sh /usr/local/bin/
 COPY jupyter_notebook_config.py /etc/jupyter/
-RUN fix-permissions /etc/jupyter/
+#RUN fix-permissions /etc/jupyter/
 # Configure container startup
 USER $NB_UID
 ENTRYPOINT ["tini", "-g", "--"]
