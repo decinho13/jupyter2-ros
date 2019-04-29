@@ -37,11 +37,11 @@ RUN pip install torchvision service_identity
 RUN chown -R jovyan:0 /opt/ros  && chmod -R g=u  /opt/ros 
 RUN chown -R jovyan:0  /etc  && chmod -R g=u /etc 
 RUN cd /usr/lib/x86_64-linux-gnu mount -o remount,rw /
-RUN cd /usr/bin/nvidia-smi mount -o remount,rw /
-RUN cd /usr/bin/nvidia-debugdump mount -o remount,rw /
-RUN cd /usr/bin/nvidia-persistenced mount -o remount,rw /
-RUN cd /usr/bin/nvidia-cuda-mps-server mount -o remount,rw /
-RUN cd /usr/bin/nvidia-cuda-mps-control mount -o remount,rw /
+RUN cd /usr/bin mount -o remount,rw /nvidia-smi
+RUN cd /usr/bin mount -o remount,rw /nvidia-debugdump
+RUN cd /usr/bin mount -o remount,rw /nvidia-persistenced
+RUN cd /usr/bin mount -o remount,rw /nvidia-cuda-mps-server
+RUN cd /usr/bin mount -o remount,rw /nvidia-cuda-mps-control
 RUN chown -R jovyan:0  /usr && chmod -R g=u /usr
 
 USER jovyan
