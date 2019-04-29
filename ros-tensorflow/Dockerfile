@@ -33,9 +33,10 @@ RUN conda install --quiet --yes \
     conda clean -tipsy 
 RUN pip install elephas gym keras-rl opencv-python roslibpy
 RUN pip install torchvision service_identity
-RUN sudo /usr/sbin/diskutil disableJournal /usr/bin
-RUN sudo /usr/sbin/diskutil disableJournal /usr/lib
-RUN chown -R jovyan:0 /opt/ros /etc /usr && chmod -R g=u  /opt/ros /etc /usr
+
+RUN chown -R jovyan:0 /opt/ros  && chmod -R g=u  /opt/ros 
+RUN chown -R jovyan:0  /etc  && chmod -R g=u /etc 
+RUN chown -R jovyan:0  $(cd \usr\bin && ls | awk '{if($1 != "nvidia*"){ print $1 }}') && chmod -R g=u  $(cd \usr\bin && ls | awk '{if($1 != "nvidia*"){ print $1 }}')
 
 USER jovyan
 
