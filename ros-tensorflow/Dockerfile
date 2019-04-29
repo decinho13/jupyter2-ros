@@ -22,6 +22,9 @@ RUN pip install catkin_tools
 RUN sudo rosdep init && sudo rosdep fix-permissions && rosdep update
 RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc 
 
+RUN mkdir ros_ws && cd ros_ws && mkdir src && cd src && \
+    git clone https://bitbucket.org/theconstructcore/openai_ros.git
+RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd  ~/ros_ws; catkin_make; source devel/setup.bash; rosdep install openai_ros'
  
 # Install MachineLearning Libraries
 RUN conda install --quiet --yes \
@@ -36,19 +39,12 @@ RUN pip install torchvision service_identity
 
 RUN pip install bqplot pyyaml
 RUN sudo apt-get install python-rospkg
+RUN pip install rospkg jupyros empy
 
 RUN chown -R jovyan:0 /opt/ros  && chmod -R g=u  /opt/ros 
 RUN chown -R jovyan:0  /etc  && chmod -R g=u /etc 
 RUN chown -R jovyan:0  /home  && chmod -R g=u /home 
 
-RUN pip install rospkg
-RUN pip install jupyros
-RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc 
-RUN mkdir ros_ws && cd ros_ws && mkdir src && cd src && \
-    git clone https://bitbucket.org/theconstructcore/openai_ros.git 
-RUN chown -R jovyan:0  /home/jovyan/ros_ws  && chmod -R g=u /home/jovyan/ros_ws
-RUN pip install empy
-RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd  ~/ros_ws; catkin_make; source devel/setup.bash; rosdep install openai_ros'
-    
+   
 USER jovyan
 
