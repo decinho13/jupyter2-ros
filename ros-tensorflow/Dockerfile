@@ -38,7 +38,7 @@ RUN pip install elephas gym keras-rl opencv-python roslibpy
 RUN pip install torchvision service_identity
 
 RUN pip install bqplot pyyaml
-RUN sudo apt-get install python-rospkg
+RUN sudo apt-get install -y python-rospkg
 RUN pip install rospkg jupyros
 
 RUN chown -R jovyan:0 /opt/ros  && chmod -R g=u  /opt/ros 
