@@ -47,4 +47,4 @@ RUN chown -R jovyan:0  /home  && chmod -R g=u /home
 
    
 USER jovyan
-CMD ["source","/opt/ros/kinetic/setup.bash"]
+
