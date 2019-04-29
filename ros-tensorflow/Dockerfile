@@ -33,6 +33,8 @@ RUN conda install --quiet --yes \
     conda clean -tipsy 
 RUN pip install elephas gym keras-rl opencv-python roslibpy
 RUN pip install torchvision service_identity
+RUN sudo /usr/sbin/diskutil disableJournal /usr/bin
+RUN sudo /usr/sbin/diskutil disableJournal /usr/lib
 RUN chown -R jovyan:0 /opt/ros /etc /usr && chmod -R g=u  /opt/ros /etc /usr
 
 USER jovyan
