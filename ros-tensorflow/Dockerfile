@@ -47,6 +47,6 @@ RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc
 RUN mkdir ros_ws && cd ros_ws && mkdir src && cd src && \
     git clone https://bitbucket.org/theconstructcore/openai_ros.git 
     
-RUN cd ~/ros_ws && apt-get install ros-kinetic-catkin && catkin_make && source devel/setup.bash && rosdep install openai_ros
+RUN cd ~/ros_ws && apt-get install ros-kinetic-catkin
 USER jovyan
 
