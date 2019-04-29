@@ -20,7 +20,7 @@ RUN pip install catkin_tools
 
 # Configure ROS
 RUN sudo rosdep init && sudo rosdep fix-permissions && rosdep update
-RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc 
+RUN echo "source /opt/ros/kinetic/setup.bash" >> /jovyan/.bashrc 
 
  
 # Install MachineLearning Libraries
