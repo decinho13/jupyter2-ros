@@ -21,7 +21,7 @@ RUN pip install catkin_tools empy
 # Configure ROS
 RUN sudo rosdep init && sudo rosdep fix-permissions && rosdep update
 RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc 
-
+RUN sudo apt-get install ros-kinetic-controller-manager-msgs
 RUN mkdir ros_ws && cd ros_ws && mkdir src && cd src && \
     git clone https://bitbucket.org/theconstructcore/openai_ros.git
 RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd  ~/ros_ws; catkin_make; source devel/setup.bash; rosdep install openai_ros'
