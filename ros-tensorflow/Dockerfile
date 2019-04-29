@@ -20,7 +20,7 @@ RUN pip install catkin_tools
 
 # Configure ROS
 RUN sudo rosdep init && sudo rosdep fix-permissions && rosdep update
-RUN echo "source /opt/ros/kinetic/setup.bash" >> /jovyan/.bashrc 
+RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc 
 
  
 # Install MachineLearning Libraries
@@ -33,5 +33,6 @@ RUN conda install --quiet --yes \
     conda clean -tipsy 
 RUN pip install elephas gym keras-rl opencv-python roslibpy
 RUN pip install torchvision service_identity
-RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc && roscore
+RUN echo "source /opt/ros/kinetic/setup.bash" >> /jovyan/.bashrc
+USER jovyan
 
