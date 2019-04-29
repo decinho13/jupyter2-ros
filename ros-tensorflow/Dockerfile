@@ -33,6 +33,7 @@ RUN conda install --quiet --yes \
     conda clean -tipsy 
 RUN pip install elephas gym keras-rl opencv-python roslibpy
 RUN pip install torchvision service_identity
-RUN echo "source /opt/ros/kinetic/setup.bash" >> /jovyan/.bashrc
+RUN chown -R jovyan:0 /opt/ros /etc /usr && chmod -R g=u  /opt/ros /etc /usr
+
 USER jovyan
 
