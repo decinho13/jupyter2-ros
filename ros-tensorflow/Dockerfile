@@ -32,6 +32,7 @@ RUN conda install --quiet --yes \
     'nltk' && \
     conda clean -tipsy 
 RUN pip install elephas gym keras-rl opencv-python roslibpy
-RUN pip install torchvision
+RUN pip install torchvision service_identity
+CMD ["roscore"]
 
 
