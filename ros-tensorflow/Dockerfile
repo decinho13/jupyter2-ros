@@ -46,6 +46,6 @@ RUN pip install jupyros
 RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc 
 RUN mkdir ros_ws && cd ros_ws && mkdir src && cd src && \
     git clone https://bitbucket.org/theconstructcore/openai_ros.git &&\
-    cd .. && echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc && source ~/.bashrc && catkin_make 
+    cd .. && echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc && source ~/.bashrc && catkin_make 
 USER jovyan
 
