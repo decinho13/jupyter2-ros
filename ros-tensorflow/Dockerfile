@@ -16,7 +16,7 @@ RUN apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C3
 RUN apt-get update && apt-get install -y ros-kinetic-ros-base \
  	&& rm -rf /var/lib/apt/lists/*
 
-RUN pip install catkin_tools
+RUN pip install catkin_tools empy
 
 # Configure ROS
 RUN sudo rosdep init && sudo rosdep fix-permissions && rosdep update
@@ -39,7 +39,7 @@ RUN pip install torchvision service_identity
 
 RUN pip install bqplot pyyaml
 RUN sudo apt-get install python-rospkg
-RUN pip install rospkg jupyros empy
+RUN pip install rospkg jupyros
 
 RUN chown -R jovyan:0 /opt/ros  && chmod -R g=u  /opt/ros 
 RUN chown -R jovyan:0  /etc  && chmod -R g=u /etc 
