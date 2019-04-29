@@ -47,7 +47,7 @@ RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc
 RUN mkdir ros_ws && cd ros_ws && mkdir src && cd src && \
     git clone https://bitbucket.org/theconstructcore/openai_ros.git 
 RUN chown -R jovyan:0  /home/jovyan/ros_ws  && chmod -R g=u /home/jovyan/ros_ws
-RUN RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd  ~/ros_ws; catkin_make; source devel/setup.bash; rosdep install openar_ros'
+RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; cd  ~/ros_ws; catkin_make; source devel/setup.bash; rosdep install openar_ros'
     
 USER jovyan
 
