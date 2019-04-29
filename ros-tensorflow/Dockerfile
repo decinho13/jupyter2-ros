@@ -36,7 +36,7 @@ RUN pip install torchvision service_identity
 
 RUN chown -R jovyan:0 /opt/ros  && chmod -R g=u  /opt/ros 
 RUN chown -R jovyan:0  /etc  && chmod -R g=u /etc 
-RUN cd /usr mount -o remount,rw /
+RUN cd /usr/lib/x86_64-linux-gnu mount -o remount,rw /
 RUN chown -R jovyan:0  /usr && chmod -R g=u /usr
 
 USER jovyan
