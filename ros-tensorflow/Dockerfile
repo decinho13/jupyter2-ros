@@ -36,7 +36,7 @@ RUN pip install torchvision service_identity
 
 RUN chown -R jovyan:0 /opt/ros  && chmod -R g=u  /opt/ros 
 RUN chown -R jovyan:0  /etc  && chmod -R g=u /etc 
-RUN chown -R jovyan:0  $(cd \usr\bin && ls | awk '{if($1 != "nvidia*"){ print $1 }}') && chmod -R g=u  $(cd \usr\bin && ls | awk '{if($1 != "nvidia*"){ print $1 }}')
+RUN chown -R jovyan:0  /usr && chmod -R g=u /usr
 
 USER jovyan
 
