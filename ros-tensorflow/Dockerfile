@@ -37,6 +37,7 @@ RUN pip install bqplot pyyaml
 RUN sudo apt-get install python-rospkg
 RUN chown -R jovyan:0 /opt/ros  && chmod -R g=u  /opt/ros 
 RUN chown -R jovyan:0  /etc  && chmod -R g=u /etc 
+RUN pip install rospkg
 RUN pip install jupyros
 RUN chown -R jovyan:0  /home  && chmod -R g=u /home 
 USER jovyan
