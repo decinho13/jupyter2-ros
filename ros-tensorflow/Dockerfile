@@ -44,8 +44,8 @@ RUN chown -R jovyan:0  /home  && chmod -R g=u /home
 RUN pip install rospkg
 RUN pip install jupyros
 
-RUN mkdir ros_ws && cd ros_ws && mkdir src && cd src && \\
-    git clone https://bitbucket.org/theconstructcore/openai_ros.git &&\\
+RUN mkdir ros_ws && cd ros_ws && mkdir src && cd src && \
+    git clone https://bitbucket.org/theconstructcore/openai_ros.git &&\
     cd .. && catkin_make && source devel/setup.bash && rosdep install openai_ros
 USER jovyan
 
